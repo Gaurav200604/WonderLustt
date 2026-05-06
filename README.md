@@ -1,4 +1,4 @@
-# 🌍 WanderLust - Airbnb Clone
+# 🌍 WanderLust - A Booking Platform
 
 A full-stack web application for discovering, listing, and reviewing vacation rentals. Built with **Node.js**, **Express**, **MongoDB**, and **EJS**, deployed on **Render**.
 
@@ -422,6 +422,6 @@ This project is **open source** and available under the [ISC License](LICENSE).
 
 ---
 
-Made with ❤️ by [Gaurav Sharma](https://github.com/Gaurav200604)
+Made by [Gaurav Kumar](https://github.com/Gaurav200604)
 
 **Last Updated:** May 2026
