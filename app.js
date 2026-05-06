@@ -23,17 +23,21 @@ const userRouter = require("./routes/user.js");
 
 const dburl = process.env.ATLASDB_URL;
 
-main()
-  .then(() => {
+async function startServer() {
+  try {
+    await mongoose.connect(dburl);
     console.log("Successfully connected to DB.");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-async function main() {
-  await mongoose.connect(dburl);
+    app.listen(8080, () => {
+      console.log("Server is listening on port 8080...");
+    });
+  } catch (err) {
+    console.error("DB connection error:", err);
+    // Exit so the process doesn't run with a partially-initialized app
+    process.exit(1);
+  }
 }
+
+startServer();
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -51,8 +55,8 @@ const store = MongoStore.create({
   touchAfter:24*3600,
 });
 
-store.on("error",()=>{
-  console.log("error in mongo session store",err);
+store.on("error", (err) => {
+  console.log("error in mongo session store", err);
 });
 
 const sessionOptions= {
@@ -60,10 +64,11 @@ const sessionOptions= {
   secret : process.env.SECRET,
   resave : false,
   saveUninitialized: true,
-  cookie:{
-    expires:Date.now()+7*24*60*1000,
-    maxAge:7*24*60*1000,
-    httpOnly:true,
+  cookie: {
+    // `expires` should be a Date and `maxAge` is milliseconds
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
   }
 
 }
@@ -109,8 +114,5 @@ app.use((err, req, res, next) => {
   res.status(statuscode).render("error.ejs", { statuscode, message });
 });
 
-// Start server
-app.listen(8080, () => {
-  console.log("Server is listening on port 8080...");
-});
+// server started inside `startServer()` after DB connection
 
