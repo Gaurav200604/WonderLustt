@@ -1,4 +1,4 @@
-# 🌍 WanderLust - Airbnb Clone
+# 🌍 WanderLust - A Booking Platform
 
 A full-stack web application for discovering, listing, and reviewing vacation rentals. Built with **Node.js**, **Express**, **MongoDB**, and **EJS**, deployed on **Render**.
 
