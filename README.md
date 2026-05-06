@@ -2,7 +2,7 @@
 
 A full-stack web application for discovering, listing, and reviewing vacation rentals. Built with **Node.js**, **Express**, **MongoDB**, and **EJS**, deployed on **Render**.
 
-🌐 **Live Demo:** [https://wonderlust-rtda.onrender.com](https://wonderlust-rtda.onrender.com)  
+🌐 **Live Demo:** [https://wonderlust-rtda.onrender.com](https://wonderlustt-1.onrender.com/)  
 📂 **GitHub:** [Gaurav200604/WonderLustt](https://github.com/Gaurav200604/WonderLustt)
 
 ---
