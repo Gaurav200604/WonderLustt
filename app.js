@@ -23,6 +23,17 @@ const userRouter = require("./routes/user.js");
 
 const dburl = process.env.ATLASDB_URL;
 
+const missingEnvVars = ["ATLASDB_URL", "SECRET"].filter(
+  (key) => !process.env[key]
+);
+
+if (missingEnvVars.length) {
+  console.error(
+    `Missing required environment variables: ${missingEnvVars.join(", ")}`
+  );
+  process.exit(1);
+}
+
 async function startServer() {
   try {
     await mongoose.connect(dburl);
@@ -48,13 +59,19 @@ app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-const store = MongoStore.create({
-  mongoUrl:dburl,
-  crypto:{
-    secret:process.env.SECRET,
-  },
-  touchAfter:24*3600,
-});
+let store;
+try {
+  store = MongoStore.create({
+    mongoUrl: dburl,
+    crypto: {
+      secret: process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+  });
+} catch (err) {
+  console.error("Session store initialization failed:", err.message);
+  process.exit(1);
+}
 
 store.on("error", (err) => {
   console.log("error in mongo session store", err);
