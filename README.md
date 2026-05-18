@@ -216,7 +216,7 @@ WonderLustt/
 
 ## 🚢 **Render Deploy Notes**
 
-If your deployed site is not updating after a GitHub push, check these Render settings first:
+If your deployed site is not updating after a GitHub push, check these Render settings first for this service:
 
 1. Make sure the service is linked to the same branch you push to, usually `main`.
 2. In Render, open the service settings and set **Auto-Deploy** to **On Commit**.
