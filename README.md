@@ -214,6 +214,20 @@ WonderLustt/
 
 ---
 
+## 🚢 **Render Deploy Notes**
+
+If your deployed site is not updating after a GitHub push, check these Render settings first:
+
+1. Make sure the service is linked to the same branch you push to, usually `main`.
+2. In Render, open the service settings and set **Auto-Deploy** to **On Commit**.
+3. Avoid commit messages that include `[skip render]` or `[render skip]`, because Render will ignore those pushes.
+4. If a deploy fails, fix the build error in Render’s Events or Logs view, then redeploy.
+5. Use **Deploy latest commit** once after changing settings so Render starts from the newest GitHub commit.
+
+If you want the repository to define the Render service more explicitly, add a `render.yaml` Blueprint in the repo root and redeploy from that blueprint.
+
+---
+
 ## 📡 **API Routes**
 
 ### **Listings**
